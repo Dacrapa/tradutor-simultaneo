@@ -1,13 +1,26 @@
+let recognition;
+
 function startRecording() {
-    const recognition = new webkitSpeechRecognition();
+
+    recognition = new webkitSpeechRecognition();
     recognition.lang = "pt-BR";
+    recognition.continuous = true;
+    recognition.interimResults = false;
+
     recognition.start();
 
     recognition.onresult = function(event) {
-        const texto = event.results[0][0].transcript;
-        document.getElementById("original").innerText = "Você disse: " + texto;
+        const texto = event.results[event.results.length - 1][0].transcript;
+
+        document.getElementById("original").innerText =
+        "Você disse: " + texto;
+
         traduzirTexto(texto);
-    }
+    };
+
+    recognition.onerror = function() {
+        recognition.start(); // reinicia automaticamente
+    };
 }
 
 function traduzirTexto(texto) {
