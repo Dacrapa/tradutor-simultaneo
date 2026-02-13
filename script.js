@@ -11,18 +11,22 @@ function startRecording() {
 }
 
 function traduzirTexto(texto) {
-    fetch("https://api.mymemory.translated.net/get?q=" + texto + "&langpair=pt|en")
+    const idioma = document.getElementById("idioma").value;
+
+    fetch("https://api.mymemory.translated.net/get?q=" + texto + "&langpair=pt|" + idioma)
     .then(response => response.json())
     .then(data => {
-        document.getElementById("traducao").innerText =
-        "Tradução: " + data.responseData.translatedText;
+        const traducao = data.responseData.translatedText;
 
-        falarTraducao(data.responseData.translatedText);
+        document.getElementById("traducao").innerText =
+        "Tradução: " + traducao;
+
+        falarTraducao(traducao, idioma);
     });
 }
 
-function falarTraducao(texto) {
+function falarTraducao(texto, idioma) {
     const fala = new SpeechSynthesisUtterance(texto);
-    fala.lang = "en-US";
+    fala.lang = idioma;
     speechSynthesis.speak(fala);
 }
