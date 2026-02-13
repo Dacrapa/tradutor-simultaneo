@@ -7,12 +7,23 @@
 </head>
 <body>
 
-<h1>🎤 Tradutor Simultâneo</h1>
+<div class="container">
+    <h1>🌍 Tradutor Simultâneo</h1>
 
-<button onclick="startRecording()">Falar</button>
+    <select id="idioma">
+        <option value="en">Inglês</option>
+        <option value="es">Espanhol</option>
+        <option value="fr">Francês</option>
+        <option value="it">Italiano</option>
+    </select>
 
-<p id="original"></p>
-<p id="traducao"></p>
+    <button onclick="startRecording()">🎤 Falar</button>
+
+    <div class="resultado">
+        <p id="original"></p>
+        <p id="traducao"></p>
+    </div>
+</div>
 
 <script src="script.js"></script>
 
